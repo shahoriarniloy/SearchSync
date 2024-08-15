@@ -5,6 +5,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Login/Register"
 import RouteNotFound from "./RouteNotFound";
 import Main from "../components/Main";
+import Products from "../components/Products";
 
 
   export const router = createBrowserRouter([
@@ -21,6 +22,10 @@ import Main from "../components/Main";
         {
             path: "/signup",
             element: <Register></Register>,
+        },
+        {
+            path: "/products",
+            element: <Products></Products>,
         },
         
         
