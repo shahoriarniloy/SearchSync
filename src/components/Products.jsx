@@ -21,12 +21,13 @@ const Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsResponse = await axios.get(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`);
+        const productsResponse = await axios.get(`https://search-sync.vercel.app/products?page=${currentPage}&size=${itemsPerPage}`);
+
         setProducts(productsResponse.data.products);
         setTotalProducts(productsResponse.data.totalProducts);
         
-        const brandsResponse = await axios.get('http://localhost:5000/brands');
-        const categoriesResponse = await axios.get('http://localhost:5000/categories');
+        const brandsResponse = await axios.get('https://search-sync.vercel.app/brands');
+        const categoriesResponse = await axios.get('https://search-sync.vercel.app/categories');
         setBrands(brandsResponse.data);
         setCategories(categoriesResponse.data);
       } catch (error) {
@@ -39,7 +40,7 @@ const Products = () => {
 
   const fetchFilteredProducts = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`, {
+      const response = await axios.get(`https://search-sync.vercel.app/products?page=${currentPage}&size=${itemsPerPage}`, {
         params: {
           brand: selectedBrand,
           category: selectedCategory,
@@ -194,25 +195,29 @@ const Products = () => {
         <h2 className="text-lg font-semibold text-blue-900">Total Products: {totalProducts}</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-        {products.map(product => (
-          <div key={product._id} className="card card-side bg-base-100 shadow-xl h-72 w-96 p-2">
-            <figure>
-              <img
-                src={product.image_url}
-                alt={product.product_name}
-                className="h-auto w-36 "
-              />
-            </figure>
-            <div className="card-body text-center w-2/3">
-              <h2 className="card-title text-xl">{product.product_name}</h2>
-              <p>Brand: {product.brand_name}</p>
-              <p>Category: {product.category_name}</p>
-              <p>Price: ${product.price_range}</p>
-            </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      {products.map(product => (
+        <div
+          key={product._id}
+          className="card bg-base-100 shadow-xl flex flex-col items-center p-4"
+        >
+          <figure className="mb-4">
+            <img
+              src={product.image_url}
+              alt={product.product_name}
+              className="h-40 w-auto"
+            />
+          </figure>
+          <div className="text-left w-full">
+            <h2 className="card-title text-center text-lg mb-2">{product.product_name}</h2>
+            <p className="text-sm">Brand: {product.brand_name}</p>
+            <p className="text-sm">Category: {product.category_name}</p>
+            <p className="text-sm font-bold">Price: ${product.price_range}</p>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
+
 
       <div className='p-4 flex justify-center items-center'>
         <button
