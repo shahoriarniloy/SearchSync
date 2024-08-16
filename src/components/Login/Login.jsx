@@ -55,14 +55,13 @@ const Login = () => {
     const [user, setUser] = useState(null);
 
     const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
 
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 toast.success("Signed In");
                 const loggedInUser = result.user;
-                navigate(location?.state?location.state:'/');
+                navigate(location?.state?location.state:'/products');
 
                 
                 setUser(loggedInUser);
@@ -88,23 +87,7 @@ const Login = () => {
     };
     
 
-    const handleGitHubSignIn = () => {
-        signInWithPopup(auth, githubProvider)
-            .then(result => {
-                toast.success("Signed In");
-                const loggedUser = result.user;
-                navigate(location?.state?location.state:'/');
-
-
-                setUser(loggedUser);
-
-            })
-            .catch(error => {
-                toast.error("Please check your credential or try again later ");
-
-                console.log(error);
-            });
-    };
+    
 
     return (
         <div className=" mx-auto mb-0 h-fit " >

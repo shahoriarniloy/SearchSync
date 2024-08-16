@@ -101,7 +101,7 @@ const handleNextPage = () =>
    }
 
   return (
-    <div className="bg-blue-50 min-h-screen ">
+    <div className="bg-blue-50 min-h-screen p-4">
       <form onSubmit={handleFilter} className="mb-8 p-4 bg-blue-100 rounded-lg shadow-md w-full  text-sm">
         <div className='flex flex-col gap-6'>
           <div className='flex justify-start'>
@@ -223,27 +223,38 @@ const handleNextPage = () =>
       <div className='p-4'>
         <button className='btn btn-sm' onClick={handlePreviousPage}>Prev</button>
         {
-  pages.map(page => (
-    <button 
-      className={`btn btn-sm ${page === currentPage ? ' bg-blue-200' : ''}`}
-      onClick={() => setCurrentPage(page)}
-      key={page}
-    >
-      {page + 1}
-    </button>
-  ))
-}
+          pages.map(page => (
+            <button 
+              className={`btn btn-sm ${page === currentPage ? ' bg-blue-200' : ''}`}
+              onClick={() => setCurrentPage(page)}
+              key={page}
+            >
+              {page + 1}
+            </button>
+          ))
+      }
 
-              <button className='btn btn-sm' onClick={handleNextPage}>Next</button>
+      <button className='btn btn-sm' onClick={handleNextPage}>Next</button>
 
 
       
       </div>
-      <select value={itemsPerPage} onChange={handleItemsPerPage} name="" id="" >
-          <option value="5" >5</option>
+      <div className="flex items-center justify-center gap-4">
+        <label htmlFor="itemsPerPage" className="text-sm font-medium text-blue-900">
+          Number of Products Per Page:
+        </label>
+        <select
+          id="itemsPerPage"
+          value={itemsPerPage}
+          onChange={handleItemsPerPage}
+          className="px-4 py-2 rounded-lg bg-white text-blue-900 border border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+        >
+          <option value="5">5</option>
           <option value="10">10</option>
           <option value="20">20</option>
         </select>
+      </div>
+
     </div>
   );
 };
