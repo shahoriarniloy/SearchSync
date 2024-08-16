@@ -94,7 +94,7 @@ const Login = () => {
                             />
                             <button
                                 type="button"
-                                className="btn text-gray-100 btn-outline p-2 rounded-l-none border-l-0 border-gray-300"
+                                className="btn text-gray-100 bg-blue-500 btn-outline p-2 rounded-l-none border-l-0 border-gray-300"
                                 aria-label="Toggle password visibility"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
