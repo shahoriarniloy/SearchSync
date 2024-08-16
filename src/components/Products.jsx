@@ -10,13 +10,20 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const [sortOrder, setSortOrder] = useState(''); 
+  const [sortOrder, setSortOrder] = useState('');
+  const [totalProducts, setTotalProducts] = useState(0); 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const noOfPages =Math.ceil(totalProducts/itemsPerPage);
+  const pages = [...Array(noOfPages).keys()];
+ 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsResponse = await axios.get('http://localhost:5000/products');
-        setProducts(productsResponse.data);
+        const productsResponse = await axios.get(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`);
+        setProducts(productsResponse.data.products);
+        setTotalProducts(productsResponse.data.totalProducts); 
         
         const brandsResponse = await axios.get('http://localhost:5000/brands');
         const categoriesResponse = await axios.get('http://localhost:5000/categories');
@@ -28,11 +35,11 @@ const Products = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage, itemsPerPage]);
 
   const fetchFilteredProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/products', {
+      const response = await axios.get(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`, {
         params: {
           brand: selectedBrand,
           category: selectedCategory,
@@ -42,7 +49,8 @@ const Products = () => {
           sort: sortOrder 
         }
       });
-      setProducts(response.data);
+      setProducts(response.data.products);
+      setTotalProducts(response.data.totalProducts); 
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -73,9 +81,28 @@ const Products = () => {
     setProducts([]); 
   };
 
+  const handleItemsPerPage = e =>{
+    const val = parseInt(e.target.value);
+    setItemsPerPage(val);
+    setCurrentPage(0);
+   }
+
+   const handlePreviousPage = () =>
+   {
+    if (currentPage > 0){
+      setCurrentPage(currentPage-1);
+    }
+   }
+const handleNextPage = () =>
+   {
+    if (currentPage < pages.length - 1){
+      setCurrentPage(currentPage+1);
+    }
+   }
+
   return (
-    <div className="bg-blue-50 min-h-screen p-8">
-      <form onSubmit={handleFilter} className="mb-8 p-6 bg-blue-100 rounded-lg shadow-md w-full m-4 text-sm">
+    <div className="bg-blue-50 min-h-screen ">
+      <form onSubmit={handleFilter} className="mb-8 p-4 bg-blue-100 rounded-lg shadow-md w-full  text-sm">
         <div className='flex flex-col gap-6'>
           <div className='flex justify-start'>
             <input 
@@ -161,7 +188,11 @@ const Products = () => {
         </div>
       </form>
 
-      <table className="min-w-full bg-white border border-blue-200 rounded-lg shadow-lg">
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold text-blue-900">Total Products: {totalProducts}</h2>
+      </div>
+
+      <table className="w-full bg-white border border-blue-200 rounded-lg shadow-lg">
         <thead>
           <tr className="bg-blue-600 text-white">
             <th className="px-4 py-2 border-b border-blue-200">Product Name</th>
@@ -189,6 +220,30 @@ const Products = () => {
           )) : null}
         </tbody>
       </table>
+      <div className='p-4'>
+        <button className='btn btn-sm' onClick={handlePreviousPage}>Prev</button>
+        {
+  pages.map(page => (
+    <button 
+      className={`btn btn-sm ${page === currentPage ? ' bg-blue-200' : ''}`}
+      onClick={() => setCurrentPage(page)}
+      key={page}
+    >
+      {page + 1}
+    </button>
+  ))
+}
+
+              <button className='btn btn-sm' onClick={handleNextPage}>Next</button>
+
+
+      
+      </div>
+      <select value={itemsPerPage} onChange={handleItemsPerPage} name="" id="" >
+          <option value="5" >5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
     </div>
   );
 };
