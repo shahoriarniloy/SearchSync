@@ -8,7 +8,7 @@ const Main = () => {
     const location = useLocation();
     const noHeaderFooter = location.pathname.includes('login')|| location.pathname.includes('register');
     return (
-        <div className='roboto-regular'>
+        <div className='crimson-text-regular '>
             
             <Navbar></Navbar>
             <Outlet></Outlet>

@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-blue-600 p-4 ">
-        <div className='flex justify-between'>
+        <div className='flex lg:flex-row md:flex-row flex-col justify-between'>
             <div>
                 <h1 className='text-2xl text-white'>SearchSync</h1>
 
@@ -34,7 +34,7 @@ const Navbar = () => {
         {user ? (
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-red-500 text-white rounded hover:bg-red-600 btn-sm"
           >
             Logout
           </button>

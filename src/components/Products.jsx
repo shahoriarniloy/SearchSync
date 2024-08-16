@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -102,6 +103,9 @@ const handleNextPage = () =>
 
   return (
     <div className="bg-blue-50 min-h-screen p-4">
+       <Helmet>
+                <title>Products</title>
+            </Helmet>
       <form onSubmit={handleFilter} className="mb-8 p-4 bg-blue-100 rounded-lg shadow-md w-full  text-sm">
         <div className='flex flex-col gap-6'>
           <div className='flex justify-start'>
