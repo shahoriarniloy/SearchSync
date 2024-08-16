@@ -10,6 +10,7 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [sortOrder, setSortOrder] = useState(''); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +38,8 @@ const Products = () => {
           category: selectedCategory,
           minPrice,
           maxPrice,
-          search
+          search,
+          sort: sortOrder 
         }
       });
       setProducts(response.data);
@@ -53,6 +55,7 @@ const Products = () => {
     if (name === 'category') setSelectedCategory(value);
     if (name === 'minPrice') setMinPrice(value);
     if (name === 'maxPrice') setMaxPrice(value);  
+    if (name === 'sortOrder') setSortOrder(value); 
   };
 
   const handleFilter = (e) => {
@@ -66,12 +69,13 @@ const Products = () => {
     setSelectedCategory('');
     setMinPrice('');
     setMaxPrice('');
+    setSortOrder(''); 
     setProducts([]); 
   };
 
   return (
-    <div className="bg-blue-50 min-h-screen ">
-      <form onSubmit={handleFilter} className="mb-8 p-4 bg-blue-100 rounded-lg shadow-md w-1/2 text-sm">
+    <div className="bg-blue-50 min-h-screen p-8">
+      <form onSubmit={handleFilter} className="mb-8 p-6 bg-blue-100 rounded-lg shadow-md w-full m-4 text-sm">
         <div className='flex flex-col gap-6'>
           <div className='flex justify-start'>
             <input 
@@ -127,6 +131,19 @@ const Products = () => {
               className='px-6 py-2 rounded-lg bg-white text-blue-900 border border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200'
             />
           </div>
+
+          <div className='flex justify-start gap-4'>
+            <select 
+              name="sortOrder" 
+              value={sortOrder} 
+              onChange={handleFilterChange} 
+              className='px-6 py-2 rounded-lg bg-white text-blue-900 border border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200'
+            >
+              <option value="">Sort by Price</option>
+              <option value="asc">Low to High</option>
+              <option value="desc">High to Low</option>
+            </select>
+          </div>
         </div>
         <div className='mt-6 flex gap-4'>
           <input 
@@ -144,7 +161,7 @@ const Products = () => {
         </div>
       </form>
 
-      <table className=" bg-white border border-blue-200 rounded-lg shadow-lg w-full">
+      <table className="min-w-full bg-white border border-blue-200 rounded-lg shadow-lg">
         <thead>
           <tr className="bg-blue-600 text-white">
             <th className="px-4 py-2 border-b border-blue-200">Product Name</th>
