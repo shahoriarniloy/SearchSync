@@ -1,7 +1,7 @@
 
 # SearchSync Frontend
 
-This is the frontend part of the earchSync project, built using React.js and Tailwind CSS.
+This is the frontend part of the SearchSync project, built using React.js and Tailwind CSS.
 
 ## Project Setup
 
