@@ -31,7 +31,7 @@ const Products = () => {
         setBrands(brandsResponse.data);
         setCategories(categoriesResponse.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        // console.error('Error fetching data:', error);
       }
     };
 
@@ -53,7 +53,7 @@ const Products = () => {
       setProducts(response.data.products);
       setTotalProducts(response.data.totalProducts);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      // console.error('Error fetching products:', error);
     }
   };
 

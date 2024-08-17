@@ -31,7 +31,7 @@ const Register = () => {
         const password = e.target.password.value;
 
        
-        console.log(email, password, name, url);
+        // console.log(email, password, name, url);
         const uppercaseRegex = /[A-Z]/;
         const lowercaseRegex = /[a-z]/;
         if(password.length <6){
@@ -51,13 +51,13 @@ const Register = () => {
         setRegisterError('');
         createUserWithEmailAndPassword(auth,email,password)
         .then(result => {
-            console.log(result.user);
+            // console.log(result.user);
             updateUserProfile(name, url); // Passing name and url to updateUserProfile
             toast.success("Registered");
             navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
-            console.error(error);
+            // console.error(error);
             setRegisterError(error.message);
         });
 

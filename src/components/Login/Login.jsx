@@ -28,11 +28,11 @@ const Login = () => {
                 const loggedInUser = result.user;
                 setUser(loggedInUser);
 
-                navigate(location?.state ? location.state : '/products');
+                navigate( '/');
             })
             .catch(error => {
                 toast.error("Please check your credential or try again later ");
-                console.log('error', error.message);
+                // console.log('error', error.message);
             });
     };
 
@@ -49,7 +49,7 @@ const Login = () => {
             })
             .catch(error => {
                 toast.error("Invalid Credentials");
-                console.error(error);
+                // console.error(error);
                 navigate('/login');
             });
     };
@@ -61,7 +61,7 @@ const Login = () => {
                 setUser(null);
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
                 toast.error("Failed to sign out");
             });
     };
