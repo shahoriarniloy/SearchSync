@@ -103,7 +103,7 @@ const Products = () => {
   return (
     <div className="bg-blue-50  p-4">
       <Helmet>
-        <title>Products</title>
+        <title>SearchSync</title>
       </Helmet>
       <form onSubmit={handleFilter} className="mb-8 p-4 bg-blue-100 rounded-lg shadow-md w-full text-sm">
         <div className='flex flex-col gap-6'>
