@@ -163,17 +163,20 @@ const Products = () => {
           </div>
 
           <div className='flex justify-start gap-4'>
-            <select
-              name="sortOrder"
-              value={sortOrder}
-              onChange={handleFilterChange}
-              className='px-6 py-2 rounded-lg bg-white text-blue-900 border border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200'
-            >
-              <option value="">Sort by Price</option>
-              <option value="asc">Low to High</option>
-              <option value="desc">High to Low</option>
-            </select>
-          </div>
+  <select
+    name="sortOrder"
+    value={sortOrder}
+    onChange={handleFilterChange}
+    className='px-6 py-2 rounded-lg bg-white text-blue-900 border border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200'
+  >
+    <option value="">Sort by</option>
+    <option value="asc">Price: Low to High</option>
+    <option value="desc">Price: High to Low</option>
+    <option value="date_asc">Date: Oldest First</option>
+    <option value="date_desc">Date: Newest First</option>
+  </select>
+</div>
+
         </div>
         <div className='mt-6 flex gap-4'>
           <input
