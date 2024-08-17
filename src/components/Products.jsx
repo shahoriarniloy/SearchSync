@@ -214,7 +214,7 @@ const Products = () => {
             <p className="text-xs mb-2"> {product.description}</p>
             <p className="text-sm font-bold">Brand: {product.brand_name}</p>
             <p className="text-sm font-bold">Category: {product.category_name}</p>
-            <p className="text-sm font-bold">Rating: ${product.ratings}</p>
+            <p className="text-sm font-bold">Rating: {product.ratings}</p>
             <p className="text-sm font-bold">Price: ${product.price_range}</p>
             <p className="text-sm font-bold">Created On: {product.product_creation_date_time}</p>
           </div>
